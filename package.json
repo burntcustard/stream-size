@@ -1,0 +1,19 @@
+{
+  "name": "gulp-stream-size",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burntcustard/gulp-stream-size.git"
+  },
+  "author": "burntcustard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/burntcustard/gulp-stream-size/issues"
+  },
+  "homepage": "https://github.com/burntcustard/gulp-stream-size#readme"
+}
