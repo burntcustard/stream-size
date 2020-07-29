@@ -5,12 +5,20 @@ const log = require('fancy-log');
 const Transform = require('stream').Transform;
 
 module.exports = (options = {}, callback) => {
+  function formatSize(size) {
+    if (options.bytes) {
+      return size += ' B';
+    }
+
+    return filesize(size, options);
+  }
+
   function getSize(file) {
-    let sizeString = filesize(file.contents.length, options);
+    let sizeString = formatSize(file.contents.length);
 
     if (options.gzip) {
-      let gzipped = filesize(gzipSize.sync(file.contents), options);
-      sizeString += ` (gzipped: ${gzipped})`;
+      let gzippedString = formatSize(gzipSize.sync(file.contents));
+      sizeString += ` (gzipped: ${gzippedString})`;
     }
 
     if (callback instanceof Function) {
