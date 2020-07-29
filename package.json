@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/burntcustard/gulp-stream-size/issues"
   },
-  "homepage": "https://github.com/burntcustard/gulp-stream-size#readme"
+  "homepage": "https://github.com/burntcustard/gulp-stream-size#readme",
+  "dependencies": {
+    "fancy-log": "^1.3.3",
+    "filesize": "^6.1.0",
+    "gzip-size": "^5.1.1"
+  }
 }
