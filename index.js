@@ -8,9 +8,9 @@ module.exports = (options = {}, callback) => {
   function formatSize(size) {
     if (options.bytes) {
       return size += ' B';
+    } else {
+      return filesize(size, options);
     }
-
-    return filesize(size, options);
   }
 
   function getSize(file) {
