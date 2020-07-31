@@ -1,39 +1,31 @@
 var assert = require('assert');
 //var es = require('event-stream');
 var File = require('vinyl');
-var size = require('.');
+var streamSize = require('.');
 var stdout = require("test-console").stdout;
 var gulp = require('gulp');
 var vfs = require('vinyl-fs');
+var fs = require('fs');
+var sinon = require('sinon');
+const log = require('fancy-log');
 
 describe('stream-size', function() {
   it('should do something', function() {
 
-    // create the fake file
-    var fakeFile = new File({
-      path: 'test-path',
-      cwd: __dirname,
-      base: 'test-base',
-      contents: new Buffer.from('this is 21 characters'),
-    });
+    const stub = sinon.stub(log);
 
-    var output = stdout.inspectSync(function() {
-      //console.log(JSON.stringify(fakeFile.contents));
+    console.log(stub);
+    stub.calledWith('test');
 
-      var log = function(file, cb) {
-        //console.log(file.path);
-        console.log(file);
-        cb(null, file);
-      };
+    function test() {
+      return gulp
+        .src('test.txt')
+        .pipe(streamSize())
+        .pipe(gulp.dest('test-output'));
+    }
 
-      //fakeFile.contents.pipe(size());
-      vfs
-        .src('./*.txt')
-        .pipe(log)
-        .pipe(size())
-        .pipe(vfs.dest('./output'));
-    });
+    gulp.series(test);
 
-    assert.deepEqual(output, ['21 B']);
+    //assert.deepEqual(stub.calledWith('test'), ['7 B']);
   });
 });
