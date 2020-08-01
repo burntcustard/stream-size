@@ -2,7 +2,8 @@
 const filesize = require('filesize');
 const gzipSize = require('gzip-size');
 const log = require('fancy-log');
-const Transform = require('stream').Transform;
+const { Transform } = require('stream');
+const Vinyl = require('vinyl');
 
 module.exports = (options = {}, callback) => {
   function formatSize(size) {
@@ -31,18 +32,20 @@ module.exports = (options = {}, callback) => {
   return new Transform({
     objectMode: true,
     transform: function(file, encoding, transformCallback) {
-      if (file.isNull()) {
-        return transformCallback(null, file);
-      }
+      if (Vinyl.isVinyl(file)) {
+        if (file.isNull()) {
+          return transformCallback(null, file);
+        }
 
-      if (file.isStream()) {
-        getSize(file);
-        return transformCallback(null, file);
-      }
+        if (file.isStream()) {
+          getSize(file);
+          return transformCallback(null, file);
+        }
 
-      if (file.isBuffer()) {
-        getSize(file);
-        return transformCallback(null, file);
+        if (file.isBuffer()) {
+          getSize(file);
+          return transformCallback(null, file);
+        }
       }
     }
   });
