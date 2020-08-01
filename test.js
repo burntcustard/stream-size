@@ -15,7 +15,6 @@ afterEach(() => {
 
 describe('stream-size', () => {
   it('should work with gulp and a real file', (done) => {
-
     gulp
       .src('test.txt')
       .pipe(streamSize())
@@ -48,19 +47,5 @@ describe('stream-size', () => {
     });
 
     stream.end();
-  });
-
-  it('should work with plain Node streams, without a', (done) => {
-    const fileStream = fs.createReadStream('test.txt');
-
-    fileStream
-      .pipe(streamSize())
-      .on('finish', () => {
-        expect(stdoutSpy).lastCalledWith(
-          expect.stringContaining('27 B'),
-          expect.anything()
-        );
-        done();
-      });
   });
 });
