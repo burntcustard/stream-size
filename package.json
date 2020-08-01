@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "gulp": "^4.0.2",
-    "jest": "^26.2.2"
+    "jest": "^26.2.2",
+    "vinyl": "^2.2.0"
   }
 }
