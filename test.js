@@ -1,12 +1,21 @@
-const streamSize = require('.');
-const gulp = require('gulp');
-const Vinyl = require('vinyl');
 //const { Readable } = require('stream');
+const gulp = require('gulp');
+const streamSize = require('.');
+const Vinyl = require('vinyl');
 const fs = require('fs');
+let stdoutSpy;
+
+beforeEach(() => {
+  stdoutSpy = jest.spyOn(process.stdout, 'write');
+});
+
+afterEach(() => {
+  stdoutSpy.mockRestore();
+});
 
 describe('stream-size', () => {
   it('should work with gulp and a real file', (done) => {
-    const stdoutSpy = jest.spyOn(process.stdout, 'write');
+
     gulp
       .src('test.txt')
       .pipe(streamSize())
@@ -21,7 +30,6 @@ describe('stream-size', () => {
   });
 
   it('should work with a Vinyl', (done) => {
-    const stdoutSpy = jest.spyOn(process.stdout, 'write');
     const stream = streamSize();
 
     stream.write(new Vinyl({
@@ -43,15 +51,9 @@ describe('stream-size', () => {
   });
 
   it('should work with plain Node streams', (done) => {
-    const stdoutSpy = jest.spyOn(process.stdout, 'write');
     const stream = fs.createReadStream('test.txt');
 
-    stream.on('open', () => {
-      stream.pipe(streamSize());
-      stream.destroy();
-    });
-
-    stream.on('data', () => {});
+    stream.pipe(streamSize());
 
     stream.on('end', () => {
       expect(stdoutSpy).lastCalledWith(
@@ -61,6 +63,19 @@ describe('stream-size', () => {
       done();
     });
 
-    stream.end();
+    stream.on('open', () => {
+    });
+
+    // stream.on('data', () => {});
+    //
+    // stream.on('end', () => {
+    //   expect(stdoutSpy).lastCalledWith(
+    //     expect.stringContaining('example.js: 1.21 KB'),
+    //     expect.anything()
+    //   );
+    //   done();
+    // });
+    //
+    // stream.end();
   });
 });
