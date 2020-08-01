@@ -1,8 +1,6 @@
-//const { Readable } = require('stream');
 const gulp = require('gulp');
 const streamSize = require('.');
 const Vinyl = require('vinyl');
-const fs = require('fs');
 let stdoutSpy;
 
 beforeEach(() => {
