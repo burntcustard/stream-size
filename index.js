@@ -14,17 +14,23 @@ module.exports = (options = {}, callback) => {
   }
 
   function getSize(file) {
-    let sizeString = formatSize(file.contents.length);
+    let info = {
+      filename: file.relative,
+      sizeString: 'test',
+      toString: () => info.sizeString
+    };
+
+    info.size = info.sizeString = formatSize(file.contents.length);
+    info.gzip = formatSize(gzipSize.sync(file.contents));
 
     if (options.gzip) {
-      let gzippedString = formatSize(gzipSize.sync(file.contents));
-      sizeString += ` (gzipped: ${gzippedString})`;
+      info.sizeString += ` (gzipped: ${info.gzip})`;
     }
 
     if (callback instanceof Function) {
-      callback(sizeString);
+      callback(info);
     } else {
-      log(`${file.relative}: ${sizeString}`);
+      log(`${file.relative}: ${info}`);
     }
   }
 
