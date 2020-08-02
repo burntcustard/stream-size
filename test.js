@@ -26,7 +26,7 @@ describe('stream-size', () => {
       });
   });
 
-  it('should work with a Vinyl', (done) => {
+  it('should work with a Vinyl', done => {
     const stream = streamSize();
 
     stream.write(new Vinyl({
@@ -34,13 +34,83 @@ describe('stream-size', () => {
       contents: Buffer.alloc(1234)
     }));
 
-    stream.on('data', () => {});
-
-    stream.on('end', () => {
+    stream.on('finish', () => {
       expect(stdoutSpy).lastCalledWith(
         expect.stringContaining('example.js: 1.21 KB'),
         expect.anything()
       );
+      done();
+    });
+
+    stream.end();
+  });
+
+  it('should print out gzipped size with gzip: true', done => {
+    const stream = streamSize({gzip: true});
+
+    stream.write(new Vinyl({
+      path: 'example.js',
+      contents: Buffer.alloc(1234)
+    }));
+
+    stream.on('finish', () => {
+      expect(stdoutSpy).lastCalledWith(
+        expect.stringContaining('example.js: 1.21 KB (gzipped: 30 B)'),
+        expect.anything()
+      );
+      done();
+    });
+
+    stream.end();
+  });
+
+  it('should pass options to the filesize package', done => {
+    const stream = streamSize({standard: 'iec'});
+
+    stream.write(new Vinyl({
+      path: 'example.js',
+      contents: Buffer.alloc(1234)
+    }));
+
+    stream.on('finish', () => {
+      expect(stdoutSpy).lastCalledWith(
+        expect.stringContaining('example.js: 1.21 KiB'),
+        expect.anything()
+      );
+      done();
+    });
+
+    stream.end();
+  });
+
+  it('should run the callback function with it\'s parameter', done => {
+    const stream = streamSize({}, size => process.stdout.write(`${size}`));
+
+    stream.write(new Vinyl({
+      path: 'example.js',
+      contents: Buffer.alloc(1234)
+    }));
+
+    stream.on('finish', () => {
+      expect(stdoutSpy).lastCalledWith('1.21 KB');
+      done();
+    });
+
+    stream.end();
+  });
+
+  it('should have filename, size, gzip props on the callback param', done => {
+    const stream = streamSize({}, info => process.stdout.write(
+      `${info.filename}: ${info.size} (gzipped: ${info.gzip})`
+    ));
+
+    stream.write(new Vinyl({
+      path: 'example.js',
+      contents: Buffer.alloc(1234)
+    }));
+
+    stream.on('finish', () => {
+      expect(stdoutSpy).lastCalledWith('example.js: 1.21 KB (gzipped: 30 B)');
       done();
     });
 
