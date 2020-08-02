@@ -1,12 +1,14 @@
 # gulp-vinyl-size
 
-> Log the size of individual files (Vinyl objects) in the stream. A simpler, more flexible alternative to [gulp-size](https://www.npmjs.com/package/gulp-size).
+[![NPM](https://nodei.co/npm/gulp-vinyl-size.png?compact=true)](https://nodei.co/npm/gulp-vinyl-size/)
 
-## Installation
+__[Gulp](https://www.npmjs.com/package/gulp) plugin to log the size of individual files (Vinyl objects) in the stream. A simpler, more flexible alternative to [gulp-size](https://www.npmjs.com/package/gulp-size).__
 
-Install with npm and add it to your development dependencies:
+## Install
 
-`npm install --save-dev gulp-vinyl-size`
+Install with [npm](https://www.npmjs.com/) as a development dependency
+
+`$ npm install --save-dev gulp-vinyl-size`
 
 ## Basic Usage
 
@@ -14,12 +16,12 @@ Install with npm and add it to your development dependencies:
 const gulp = require('gulp');
 const size = require('gulp-vinyl-size');
 
-gulp.task('scripts', function() {
+function copyScripts() {
   return gulp
     .src('assets/scripts/*.js')
     .pipe(size())
     .pipe(gulp.dest('/dist/js/'));
-});
+}
 
 // [13:01:44] main.js: 3.13 KB
 // [13:01:45] demo.js: 1.09 KB
