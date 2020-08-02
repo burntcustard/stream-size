@@ -10,8 +10,6 @@ __[Gulp](https://www.npmjs.com/package/gulp) plugin to log the size of individua
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/) as a development dependency
-
 `$ npm install --save-dev gulp-vinyl-size`
 
 ## Basic Usage
@@ -47,7 +45,7 @@ Additionally log gzipped-size.
 
 ### bytes (Default: `false`)
 
-Log size in bytes rather than using [filesize](https://www.npmjs.com/package/filesize)
+Log size in bytes rather than converting to kilobytes, megabytes, etc.
 
 ```js
 .pipe(size({bytes: true}))
@@ -57,7 +55,7 @@ Log size in bytes rather than using [filesize](https://www.npmjs.com/package/fil
 
 ### filesize
 
-All options get passed _directly_ to the size-prettifying package [filesize](https://www.npmjs.com/package/filesize) so that the output can be easily tweaked. See [the filesize npm page](https://www.npmjs.com/package/filesize) for a full list of optional settings.
+All options get passed _directly_ to the size-prettifying package filesize. See [it's npm page](https://www.npmjs.com/package/filesize) for a full list of options.
 
 ```js
 .pipe(size({standard: 'iec', spacer: '|'}))
