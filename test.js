@@ -45,7 +45,7 @@ describe('stream-size', () => {
     stream.end();
   });
 
-  it('should print out gzipped size with gzip: true', done => {
+  it('should log gzipped size with gzip: true', done => {
     const stream = streamSize({gzip: true});
 
     stream.write(new Vinyl({
@@ -56,6 +56,25 @@ describe('stream-size', () => {
     stream.on('finish', () => {
       expect(stdoutSpy).lastCalledWith(
         expect.stringContaining('example.js: 1.21 KB (gzipped: 30 B)'),
+        expect.anything()
+      );
+      done();
+    });
+
+    stream.end();
+  });
+
+  it('should log bytes rather than using filesize with bytes: true', done => {
+    const stream = streamSize({bytes: true});
+
+    stream.write(new Vinyl({
+      path: 'example.js',
+      contents: Buffer.alloc(1234)
+    }));
+
+    stream.on('finish', () => {
+      expect(stdoutSpy).lastCalledWith(
+        expect.stringContaining('example.js: 1234 B'),
         expect.anything()
       );
       done();

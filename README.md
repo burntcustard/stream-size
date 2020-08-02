@@ -42,7 +42,17 @@ Additionally log gzipped-size.
 ```js
 .pipe(size({gzip: true}))
 
-// [12:32:22] main.js: 5.29 KB (2.18 KB gzipped) 
+// [12:32:22] main.js: 5.29 KB (2.18 KB gzipped)
+```
+
+### bytes (Default: `false`)
+
+Log size in bytes rather than using [filesize](https://www.npmjs.com/package/filesize)
+
+```js
+.pipe(size({bytes: true}))
+
+// [12:32:22] main.js: 5417 B
 ```
 
 ### filesize
