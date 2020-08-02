@@ -74,7 +74,7 @@ const purgecss = require('gulp-purgecss');
 
 function css() {
   return gulp
-    .src([paths.src + '/scss/style.scss'])
+    .src('src/scss/style.scss')
     .pipe(sass().on('error', sass.logError))
     .on('data', () => log('CSS'))
     .pipe(size({}, info => log(`└ transpiled ${color.magenta(size)}`)))
