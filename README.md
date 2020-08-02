@@ -51,7 +51,7 @@ All options get passed _directly_ to the size-prettifying package [filesize](htt
 
 ## Callback function
 
-The second parameter is a callback function that lets you do whatever you want with the size info, instead of having gulp-vinyl-size log it automtically.
+The second parameter is a callback function that lets you do whatever you want with the size info, instead of it being logged automtically.
 
 ```js
 .pipe(size({}, size => console.log(`Minified CSS: ${size}`))
