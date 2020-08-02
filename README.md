@@ -51,7 +51,15 @@ All options get passed _directly_ to the size-prettifying package [filesize](htt
 
 ## Callback function
 
-The second parameter is a callback function that can further customize the logging:
+The second parameter is a callback function that can further customize the logging.
+
+```js
+.pipe(size({}, size => console.log(`Minified CSS: ${size}`))
+
+// Minified CSS: 3.13 KB
+```
+
+[fancy-log](https://www.npmjs.com/package/fancy-log) can be used to keep the timestamp when logging via a callback.
 
 ```js
 const log = require('fancy-log');
