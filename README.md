@@ -1,5 +1,9 @@
 # gulp-vinyl-size
 
+[![Build Status](https://travis-ci.com/burntcustard/gulp-vinyl-size.svg?branch=master)](https://travis-ci.com/burntcustard/gulp-vinyl-size)
+[![codecov](https://codecov.io/gh/burntcustard/gulp-vinyl-size/branch/master/graph/badge.svg)](https://codecov.io/gh/burntcustard/gulp-vinyl-size)
+[![install size](https://packagephobia.com/badge?p=gulp-vinyl-size)](https://packagephobia.com/result?p=gulp-vinyl-size)
+
 [![NPM](https://nodei.co/npm/gulp-vinyl-size.png?compact=true)](https://nodei.co/npm/gulp-vinyl-size/)
 
 __[Gulp](https://www.npmjs.com/package/gulp) plugin to log the size of individual files (Vinyl objects) in the stream. A simpler, more flexible alternative to [gulp-size](https://www.npmjs.com/package/gulp-size).__
