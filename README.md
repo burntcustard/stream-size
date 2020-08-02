@@ -48,25 +48,30 @@ All options get passed _directly_ to the size-prettifying package [filesize](htt
 // [12:32:22] main.js: 5.29|KiB
 ```
 
-### Callback function
+## Callback function
 
-This can be added to further customize the logging. E.g.
+The second parameter is a callback function that can further customize the logging:
 
 ```js
+const log = require('fancy-log');
+// ...
 .pipe(size({}, size => log(`Minified CSS: ${size}`)))
 
 // [12:32:22] Minified CSS: 3.13 KB
-}
+```
 
-The parameter of the callback is an object which outputs the full size string when used within a template literal, but it also contains the following properties:
-- 'sizeString` - Size _with_ formatting, e.g. 'test.txt: 24 B' - The same as when the parameter is put directly into the callback.
-- `size`       - Size _without_ formatting, e.g. '24 B' instead of 'test.txt: 24 B'
-- `filename`   - `file.relative` of the vinyl, e.g. 'main.js'.
-- `gzip`       - Gzipped size, which is _included even if the `gzip` option is false_
+The parameter of the callback (which can be named anything, but `size` or `info` are recommended) is an object which outputs the full size string when used within a template literal, but it also contains these properties:
+- `sizeString` - Size _with_ gzipped size (if `gzip: true`). E.g. `'24 B (gzipped: 8 B)'`. Same as `info` directly in the callback.
+- `size`       - Size _without_ gzipped size. E.g. just `'24 B'`.
+- `filename`   - `file.relative` of the vinyl. E.g. `'main.js'`.
+- `gzip`       - Gzipped size, _included even if the `gzip` option is false_. E.g. `'8 B'`
+
+## Advanced usage
 
 ```js
 const gulp = require('gulp');
 const size = require('gulp-vinyl-size');
+const log = require('fancy-log');
 const c = require('ansi-colors');
 const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
