@@ -31,7 +31,7 @@ gulp.task('scripts', function() {
 
 The first parameter is an options object.
 
-### `gzip` (Default: `false`)
+### gzip (Default: `false`)
 
 Additionally log gzipped-size.
 
