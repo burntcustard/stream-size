@@ -13,7 +13,7 @@ Log the size of individual files (Vinyl objects) in the stream. A more flexible 
 ## Basic Usage
 
 ```js
-var size = require('gulp-vinyl-size');
+const size = require('gulp-vinyl-size');
 
 gulp.task('scripts', function() {
   return gulp
