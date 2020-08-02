@@ -27,7 +27,9 @@ gulp.task('scripts', function() {
 // [13:01:45] demo.js: 1.09 KB
 ```
 
-## `options`
+## Options
+
+The first parameter is an options object.
 
 ### `gzip` (Default: `false`)
 
@@ -41,7 +43,7 @@ Additionally log gzipped-size.
 
 ### filesize
 
-All options get passed _directly_ to the size-prettifying package [filesize](https://www.npmjs.com/package/filesize) so that the output can be easily tweaked. See [their npm page](https://www.npmjs.com/package/filesize) for a full list of optional settings.
+All options get passed _directly_ to the size-prettifying package [filesize](https://www.npmjs.com/package/filesize) so that the output can be easily tweaked. See [the filesize npm page](https://www.npmjs.com/package/filesize) for a full list of optional settings.
 
 ```js
 .pipe(size({standard: 'iec', spacer: '|'}))
@@ -69,13 +71,15 @@ const log = require('fancy-log');
 // [12:32:22] Minified CSS: 3.13 KB
 ```
 
-The parameter of the callback (which can be named anything, but `size` or `info` are recommended) is an object which outputs the full size string when used within a template literal, but it also contains these properties:
+## Advanced usage
+
+The parameter of the callback (which can be named anything, but `size` or `info` are recommended) is an object which outputs the size string when used within a template literal, but it also contains these properties:
 - `sizeString` - Size _with_ gzipped size (if `gzip: true`). E.g. `'24 B (gzipped: 8 B)'`. Same as `info` directly in the callback.
 - `size`       - Size _without_ gzipped size. E.g. just `'24 B'`.
+- `gzip`       - Gzipped size, _available even if the `gzip` option is false_. E.g. `'8 B'`
 - `filename`   - `file.relative` of the vinyl. E.g. `'main.js'`.
-- `gzip`       - Gzipped size, _included even if the `gzip` option is false_. E.g. `'8 B'`
 
-## Advanced usage
+With these properties, multiple calls to gulp-vinyl-size, [fancy-log](https://www.npmjs.com/package/fancy-log) and [ansi-colors](https://www.npmjs.com/package/ansi-colors), detailed logging can be done, e.g.
 
 ```js
 const gulp = require('gulp');
