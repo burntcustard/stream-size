@@ -4,7 +4,7 @@
 
 ## Installation
 
-Install with NPM and add it to your development dependencies:
+Install with npm and add it to your development dependencies:
 
 `npm install --save-dev gulp-vinyl-size`
 
