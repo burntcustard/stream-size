@@ -77,9 +77,9 @@ function css() {
     .src('src/scss/style.scss')
     .pipe(sass().on('error', sass.logError))
     .on('data', () => log('CSS'))
-    .pipe(size({}, info => log(`└ transpiled ${color.magenta(size)}`)))
+    .pipe(size({}, info => log(`└ transpiled ${color.magenta(info)}`)))
     .pipe(purgecss({content: ['**/*.php']}))
-    .pipe(size({}, info => log(`└ purged     ${color.magenta(size)}`)))
+    .pipe(size({}, info => log(`└ purged     ${color.magenta(info)}`)))
     .pipe(cleanCSS())
     .pipe(size({}, info => log(`└ minified   ${color.magenta(info.size)} ${color.gray(`(gzipped: ${info.gzip})`)}`)))
     .pipe(gulp.dest('dist/css'));
