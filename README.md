@@ -13,6 +13,7 @@ Log the size of individual files (Vinyl objects) in the stream. A more flexible 
 ## Basic Usage
 
 ```js
+const gulp = require('gulp');
 const size = require('gulp-vinyl-size');
 
 gulp.task('scripts', function() {
@@ -33,7 +34,7 @@ gulp.task('scripts', function() {
 Additionally log gzipped-size.
 
 ```js
-.pipe(size({gzip: true}})
+.pipe(size({gzip: true}))
 
 // [12:32:22] main.js: 5.29 KB (2.18 KB gzipped) 
 ```
@@ -43,7 +44,7 @@ Additionally log gzipped-size.
 All options get passed _directly_ to the size-prettifying package [filesize](https://www.npmjs.com/package/filesize) so that the output can be easily tweaked. See [their npm page](https://www.npmjs.com/package/filesize) for a full list of optional settings.
 
 ```js
-.pipe(size({standard: 'iec', spacer: '|'}})
+.pipe(size({standard: 'iec', spacer: '|'}))
 
 // [12:32:22] main.js: 5.29|KiB
 ```
