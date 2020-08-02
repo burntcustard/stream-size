@@ -1,7 +1,7 @@
 {
   "name": "gulp-vinyl-size",
   "version": "1.0.0",
-  "description": "",
+  "description": "Log size of files in the stream",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -10,12 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/burntcustard/gulp-vinyl-size.git"
   },
-  "author": "burntcustard",
+  "author": "burntcustard <burntcustard@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/burntcustard/gulp-vinyl-size/issues"
   },
   "homepage": "https://github.com/burntcustard/gulp-vinyl-size#readme",
+  "keywords": [
+    "gulpplugin",
+    "filesize",
+    "file",
+    "size",
+    "log",
+    "measure",
+    "gzip"
+  ],
   "dependencies": {
     "fancy-log": "^1.3.3",
     "filesize": "^6.1.0",
