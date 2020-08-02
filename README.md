@@ -1,14 +1,12 @@
 # gulp-vinyl-size
 
+> Log the size of individual files (Vinyl objects) in the stream. A simpler, more flexible alternative to [gulp-size](https://www.npmjs.com/package/gulp-size).
+
 ## Installation
 
 Install package with NPM and add it to your development dependencies:
 
 `npm install --save-dev gulp-vinyl-size`
-
-## Information
-
-Log the size of individual files (Vinyl objects) in the stream. A more flexible alternative to [gulp-size](https://www.npmjs.com/package/gulp-size).
 
 ## Basic Usage
 
